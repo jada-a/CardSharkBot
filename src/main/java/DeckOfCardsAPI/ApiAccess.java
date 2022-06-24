@@ -64,4 +64,7 @@ public class ApiAccess{
             deck.setShuffled(false);
             return deck;
         }
+        public void shuffle(String deckID){
+        getJSON(baseURL + deckID + "/shuffle");
+        }
 }

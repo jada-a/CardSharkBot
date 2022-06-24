@@ -6,9 +6,12 @@ import org.junit.Test;
 
 public class DeckOfCardsTest {
     ApiAccess apiAccess = new ApiAccess();
+    Deck deck = apiAccess.createDeck();
     @Test
     public void createDeckTest(){
-        Deck deck = apiAccess.createDeck();
         assertTrue(deck.exists());
+    }
+    public void shuffleTest(){
+        assertTrue(deck.shuffle());
     }
 }

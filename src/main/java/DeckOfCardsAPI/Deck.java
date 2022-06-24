@@ -4,10 +4,12 @@ public class Deck {
     private String deckID;
     private boolean shuffled;
     private long remainingAmnt;
+    ApiAccess apiAccess;
 
     public Deck(String deckID, long remainingAmnt) {
         this.deckID = deckID;
         this.remainingAmnt = remainingAmnt;
+        apiAccess = new ApiAccess();
     }
     public String getDeckID() {
         return deckID;
@@ -34,6 +36,12 @@ public class Deck {
     }
     public boolean exists(){
         return deckID != null;
+    }
+
+    public boolean shuffle(){
+        apiAccess.shuffle(this.deckID);
+        shuffled = true;
+        return shuffled;
     }
 
 
