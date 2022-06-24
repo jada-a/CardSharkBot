@@ -3,9 +3,9 @@ package DeckOfCardsAPI;
 public class Deck {
     private String deckID;
     private boolean shuffled;
-    private int remainingAmnt;
+    private long remainingAmnt;
 
-    public Deck(String deckID, int remainingAmnt) {
+    public Deck(String deckID, long remainingAmnt) {
         this.deckID = deckID;
         this.remainingAmnt = remainingAmnt;
     }
@@ -25,14 +25,16 @@ public class Deck {
         this.shuffled = shuffled;
     }
 
-    public int getRemainingAmnt() {
+    public long getRemainingAmnt() {
         return remainingAmnt;
     }
 
-    public void setRemainingAmnt(int remainingAmnt) {
+    public void setRemainingAmnt(long remainingAmnt) {
         this.remainingAmnt = remainingAmnt;
     }
-
+    public boolean exists(){
+        return deckID != null;
+    }
 
 
 
