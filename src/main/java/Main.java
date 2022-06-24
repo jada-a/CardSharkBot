@@ -5,30 +5,25 @@ import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.InputStream;
-import java.util.Arrays;
 import java.util.Map;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception{
         Yaml yaml = new Yaml();
         JDA api;
         InputStream inputStream = Main.class
                 .getClassLoader()
                 .getResourceAsStream("config.yaml");
         Map<String, String> obj = yaml.load(inputStream);
+        String token = (String) obj.values().toArray()[0];
 
-        try{
-            api = JDABuilder.createDefault((String) obj.values().toArray()[0])
+        api = JDABuilder.createDefault(token)
                     .addEventListeners(new HelloCommand())
                     .build();
 
-            api.updateCommands()
-                    .addCommands(Commands.slash("hello","This command makes Decim Bot say hi to you"))
-                    .queue();
-        }
-        catch (Exception e){
-            e.printStackTrace();
-
-        }
+        api.updateCommands()
+                .addCommands(
+                        Commands.slash("hello","This command makes Decim Bot say hi to you"))
+                .queue();
     }
 }
