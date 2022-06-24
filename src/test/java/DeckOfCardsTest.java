@@ -14,4 +14,8 @@ public class DeckOfCardsTest {
     public void shuffleTest(){
         assertTrue(deck.shuffle());
     }
+    public void createCardsTest(){
+        deck.drawCards(2);
+        assertEquals(50, deck.getRemainingAmnt());
+    }
 }

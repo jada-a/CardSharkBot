@@ -1,5 +1,7 @@
 package DeckOfCardsAPI;
 
+import java.util.List;
+
 public class Deck {
     private String deckID;
     private boolean shuffled;
@@ -39,9 +41,16 @@ public class Deck {
     }
 
     public boolean shuffle(){
-        apiAccess.shuffle(this.deckID);
-        shuffled = true;
+        shuffled = apiAccess.shuffle(getDeckID());
         return shuffled;
+    }
+    public List<Card> drawCards(int num){
+        setRemainingAmnt(remainingAmnt - num);
+        List<Card> cards = apiAccess.drawCards(num, getDeckID());
+        for(Card card: cards){
+            System.out.println(card);
+        }
+        return cards;
     }
 
 

@@ -1,5 +1,6 @@
 package DeckOfCardsAPI;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -8,6 +9,8 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class ApiAccess{
@@ -64,7 +67,26 @@ public class ApiAccess{
             deck.setShuffled(false);
             return deck;
         }
-        public void shuffle(String deckID){
-        getJSON(baseURL + deckID + "/shuffle");
+        public boolean shuffle(String deckID){
+            String json = getJSON(baseURL + deckID + "/shuffle");
+            JSONObject jsonObject = getObj(json);
+            return (Boolean)jsonObject.get("success");
+        }
+
+        public List<Card> drawCards(int num, String deckID){
+            List<Card> cards = new ArrayList<>();
+            String json = getJSON(baseURL + deckID + "/draw?count=" + num);
+            JSONObject jsonObject = getObj(json);
+            JSONArray cardArr = (JSONArray) jsonObject.get("cards");
+            for (Object o : cardArr) {
+                JSONObject cardObject = (JSONObject) o;
+                String cardImg = (String) cardObject.get("image");
+                String cardVal = (String) cardObject.get("value");
+                String cardSuit = (String) cardObject.get("suit");
+                String cardCode = (String) cardObject.get("code");
+
+                cards.add(new Card(cardImg, cardVal, cardSuit, cardCode));
+            }
+            return cards;
         }
 }
