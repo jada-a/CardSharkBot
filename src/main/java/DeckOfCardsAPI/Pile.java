@@ -29,6 +29,13 @@ public class Pile extends Deck{
     public boolean shuffle(){
         return apiAccess.shuffle(getDeckID(), getPileName());
     }
+    public void addCards(List<Card> newCards){
+        cards.addAll(newCards);
+    }
+    public void addCards(int num) {
+        List<Card> newCards = drawCards(num);
+        addCards(newCards);
+    }
 
 
 

@@ -36,6 +36,8 @@ public class Deck {
     public void setRemainingAmnt(long remainingAmnt) {
         this.remainingAmnt = remainingAmnt;
     }
+
+
     public boolean exists(){
         return deckID != null;
     }
