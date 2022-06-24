@@ -74,7 +74,12 @@ public class ApiAccess{
             JSONObject jsonObject = getObj(json);
             return (Boolean)jsonObject.get("success");
         }
-
+    //Shuffles a specific pile
+        public boolean shuffle(String deckID, String pileName){
+            String json = getJSON(baseURL + deckID + "/pile/" + pileName +"/shuffle/");
+            JSONObject jsonObject = getObj(json);
+            return (boolean) jsonObject.get("success");
+        }
 
         //Draws cards from the whole deck.
         public List<Card> drawCards(int num, String deckID){

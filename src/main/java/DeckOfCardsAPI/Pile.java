@@ -17,6 +17,19 @@ public class Pile extends Deck{
         this.cards = cards;
     }
 
+    public String getPileName() {
+        return pileName;
+    }
+
+    public void setPileName(String pileName) {
+        this.pileName = pileName;
+    }
+
+    @Override
+    public boolean shuffle(){
+        return apiAccess.shuffle(getDeckID(), getPileName());
+    }
+
 
 
 }

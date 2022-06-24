@@ -3,6 +3,8 @@ import DeckOfCardsAPI.Card;
 import DeckOfCardsAPI.Deck;
 
 import static org.junit.Assert.*;
+
+import DeckOfCardsAPI.Pile;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -33,5 +35,11 @@ public class DeckOfCardsTest {
         List<Card> cards = deck.drawCards(2);
         List<Object>responses = apiAccess.createPile(deck.getDeckID(), "player1",cards);
         assertTrue((Boolean)responses.get(0));
+    }
+    @Test
+    public void shufflePileTest(){
+        List<Card> cards = deck.drawCards(3);
+        Pile pile = (Pile) apiAccess.createPile(deck.getDeckID(),"player1", cards).get(1);
+        assertTrue(pile.shuffle());
     }
 }
