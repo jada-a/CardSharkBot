@@ -67,12 +67,16 @@ public class ApiAccess{
             deck.setShuffled(false);
             return deck;
         }
+
+        //Shuffles the whole deck of cards.
         public boolean shuffle(String deckID){
             String json = getJSON(baseURL + deckID + "/shuffle");
             JSONObject jsonObject = getObj(json);
             return (Boolean)jsonObject.get("success");
         }
 
+
+        //Draws cards from the whole deck.
         public List<Card> drawCards(int num, String deckID){
             List<Card> cards = new ArrayList<>();
             String json = getJSON(baseURL + deckID + "/draw?count=" + num);
@@ -89,4 +93,27 @@ public class ApiAccess{
             }
             return cards;
         }
+
+        public ArrayList<Object>createPile(String deckID, String pileName, List<Card> cards){
+            StringBuilder apiURL = new StringBuilder(baseURL + deckID + "/pile/" + pileName + "/add/?cards=");
+
+            apiURL.append(cards.get(0).getCode());
+
+            for(int i = 1; i < cards.size();i++){
+                apiURL.append(",").append(cards.get(i).getCode());
+            }
+
+            String json = getJSON(apiURL.toString());
+            JSONObject jsonObject = getObj(json);
+            JSONObject pilesObject = (JSONObject) jsonObject.get("piles");
+            JSONObject pileInfo = (JSONObject) pilesObject.get(pileName);
+            Pile pile = new Pile(deckID, (Long)pileInfo.get("remaining"),pileName,cards);
+            ArrayList<Object> returnValues = new ArrayList<>();
+            returnValues.add(jsonObject.get("success"));
+            returnValues.add(pile);
+            return returnValues;
+        }
+
+
+
 }
