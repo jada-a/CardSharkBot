@@ -37,6 +37,10 @@ public class Pile extends Deck{
         addCards(newCards);
     }
 
+    public List<Card> removeACard(String instruction){
+        return apiAccess.drawCardFromPile(getDeckID(),getPileName(),instruction);
+    }
+
 
 
 }
