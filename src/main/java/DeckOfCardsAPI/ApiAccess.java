@@ -134,9 +134,23 @@ public class ApiAccess {
         }
         String json = getJSON(apiURL.toString());
         JSONObject jsonObject = getObj(json);
-
         return addCardsToArray(jsonObject);
 
 
     }
+
+    //Draws multiple cards from a pile
+    //Each method depends on whether input in a number or a specific card or order of cards
+    public List<Card> drawCardsFromPile(String deckID, String pileName, int num){
+        String json = getJSON(baseURL + deckID + "/pile/" + pileName + "/draw/?count=" + num);
+        JSONObject jsonObject = getObj(json);
+        return addCardsToArray(jsonObject);
+    }
+    public List<Card> drawCardsFromPile(String deckID, String pileName, String codes){
+        String json = getJSON(baseURL + deckID + "/pile/" + pileName + "/draw/?cards=" + codes);
+        JSONObject jsonObject = getObj(json);
+        return addCardsToArray(jsonObject);
+    }
+
+
 }

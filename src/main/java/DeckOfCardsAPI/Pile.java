@@ -38,7 +38,23 @@ public class Pile extends Deck{
     }
 
     public List<Card> removeACard(String instruction){
+        setRemainingAmnt(getRemainingAmnt() - 1);
         return apiAccess.drawCardFromPile(getDeckID(),getPileName(),instruction);
+    }
+
+    //Implements the method to draw cards from a pile
+    public List<Card> removeCards(int num){
+        return apiAccess.drawCardsFromPile(getDeckID(), getPileName(), num);
+    }
+    public List<Card> removeCards(List<Card> cards){
+        StringBuilder cardCodes = new StringBuilder();
+        cardCodes.append(cards.get(0));
+
+        for(int i = 1; i < cards.size(); i++){
+            cardCodes.append(",").append(cards.get(i));
+        }
+
+        return apiAccess.drawCardsFromPile(getDeckID(), getPileName(), cardCodes.toString());
     }
 
 
