@@ -7,15 +7,19 @@ import static org.junit.Assert.*;
 import DeckOfCardsAPI.Pile;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class DeckOfCardsTest {
     ApiAccess apiAccess = new ApiAccess();
     Deck deck = apiAccess.createDeck();
+    Deck largeDeck = apiAccess.createDeck(6);
     @Test
-    public void createDeckTest(){
+    public void createStandardDeckTest(){
         assertTrue(deck.exists());
+    }
+    @Test
+    public void createLargeDeckTest(){
+        assertEquals(312, largeDeck.getRemainingAmnt());
     }
 
     @Test

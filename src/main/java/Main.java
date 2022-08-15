@@ -1,3 +1,4 @@
+import Commands.CardGames.BlackjackEvent;
 import Commands.HelloCommand;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -19,11 +20,14 @@ public class Main {
 
         api = JDABuilder.createDefault(token)
                     .addEventListeners(new HelloCommand())
+                .addEventListeners(new BlackjackEvent())
                     .build();
 
         api.updateCommands()
                 .addCommands(
-                        Commands.slash("hello","This command makes Decim Bot say hi to you"))
+                        Commands.slash("hello","This command makes Decim Bot say hi to you"),
+                        Commands.slash("blackjack","This command makes Decim Bot play Blackjack")
+                )
                 .queue();
     }
 }

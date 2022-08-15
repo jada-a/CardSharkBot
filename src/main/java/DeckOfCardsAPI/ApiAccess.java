@@ -80,6 +80,17 @@ public class ApiAccess {
         deck.setShuffled(false);
         return deck;
     }
+    //This method retrieves a deck made out of 1 or more decks of cards
+    public Deck createDeck(int num){
+        String json = getJSON(baseURL + "new/shuffle/?deck_count=" + num);
+        JSONObject jsonObject = getObj(json);
+        Deck deck = new Deck(
+                //Have to cast each output since this method returns a generic object.
+                (String) jsonObject.get("deck_id"),
+                (Long) jsonObject.get("remaining")
+        );
+        return deck;
+    }
 
     //Shuffles the whole deck of cards.
     public boolean shuffle(String deckID) {
@@ -146,6 +157,7 @@ public class ApiAccess {
         JSONObject jsonObject = getObj(json);
         return addCardsToArray(jsonObject);
     }
+
     public List<Card> drawCardsFromPile(String deckID, String pileName, String codes){
         String json = getJSON(baseURL + deckID + "/pile/" + pileName + "/draw/?cards=" + codes);
         JSONObject jsonObject = getObj(json);

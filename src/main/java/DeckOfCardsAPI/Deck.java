@@ -6,12 +6,11 @@ public class Deck {
     private String deckID;
     private boolean shuffled;
     private long remainingAmnt;
-    ApiAccess apiAccess;
+    ApiAccess apiAccess = new ApiAccess();
 
     public Deck(String deckID, long remainingAmnt) {
         this.deckID = deckID;
         this.remainingAmnt = remainingAmnt;
-        apiAccess = new ApiAccess();
     }
     public String getDeckID() {
         return deckID;
